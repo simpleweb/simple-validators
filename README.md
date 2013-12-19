@@ -25,6 +25,24 @@ class User < ActiveRecord::Base
 end
 ```
 
+#### Subdomain validator
+
+```ruby
+class Account < ActiveRecord::Base
+  include Simple::Validators
+
+  attr_accessible :subdomain
+
+  validates :subdomain, presence: true, uniqueness: true, subdomain: true
+end
+```
+
+You can also pass a custom list of reserved subdomains, eg:
+
+```ruby
+validates :subdomain, subdomain: { reserved: %w[www mail ftp home test] }
+```
+
 ## Contributing
 
 1. Fork it
